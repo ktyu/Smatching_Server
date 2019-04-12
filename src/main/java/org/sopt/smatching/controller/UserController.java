@@ -34,13 +34,33 @@ public class UserController {
     // 회원 가입
     @PostMapping("")
     public ResponseEntity signUp(@RequestBody SignUpReq signUpReq) {
-        return new ResponseEntity<>(userService.signUp(signUpReq), HttpStatus.OK);
+//        return new ResponseEntity<>(userService.signUp(signUpReq), HttpStatus.OK);
+
+        /**
+         * 상단에 주석이 실제 코드
+         *
+         * 더 이상 회원가입을 받지 않기 위해, 입력값에 상관없이 저장하지 않고 무조건 성공으로 리턴
+         */
+        DefaultRes d = DefaultRes.res(201, "회원 가입 성공");
+        return new ResponseEntity<>(d, HttpStatus.OK);
+
     }
 
     // 로그인 수행, data 키의 값 : 로그인 성공시 토큰값 / 실패시 null
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody final LoginReq loginReq) {
-        return new ResponseEntity<>(userService.login(loginReq), HttpStatus.OK);
+//        return new ResponseEntity<>(userService.login(loginReq), HttpStatus.OK);
+
+        /**
+         * 상단에 주석이 실제 코드
+         *
+         * 더 이상 회원가입을 받지 않기 때문에, 로그인 시도시 입력값에 상관없이 무조건 테스트 계정으로 로그인 수행
+         */
+
+        LoginReq l = new LoginReq();
+        l.setEmail("sdfjlsd@sdjlf.com");
+        l.setPassword("123123");
+        return new ResponseEntity<>(userService.login(l), HttpStatus.OK);
     }
 
 
